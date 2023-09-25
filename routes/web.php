@@ -27,4 +27,6 @@ Route::resource('/logger/method', EntityMethodController::class)
     ])
     ->except(['show', 'edit']);
 
-Route::get('/', [EntityMethodController::class, 'index']);
+Route::get('/', function () {
+   return redirect()->route('method.list');
+});
