@@ -1,0 +1,23 @@
+.container {
+    min-width: 1000px;
+}
+
+.p-header {
+    background-color: #005780;
+}
+
+.p-header .logo {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.p-content {
+    height: 100vh;
+    padding: 10px 0 10px 0;
+}
+
+.p-footer {
+    background-color: #373737;
+    color: #7e7e7e;
+}
