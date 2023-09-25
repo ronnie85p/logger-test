@@ -80,7 +80,7 @@ class EntityMethodController extends Controller
      */
     public function show(string $id)
     {
-        
+        //
     }
 
     /**
