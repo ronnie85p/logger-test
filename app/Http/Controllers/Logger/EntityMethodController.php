@@ -104,10 +104,6 @@ class EntityMethodController extends Controller
      */
     public function destroy(string $id)
     {
-        if (!EntityMethod::destroy($id)) {
-            throw new \Exception('Service Unavailable', 503);
-        }
-
-        return $this->redirect();
+        // 
     }
 }
