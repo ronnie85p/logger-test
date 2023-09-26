@@ -60,7 +60,6 @@
                         @else 
                             <div>-</div>
                         @endif
-                        {{-- <pre>{{ print_r($item, true)}}</pre> --}}
                     </td>
                     <td class="text-end">
                         <form class="d-inline" action="{{ route('api.method.exec', $item) }}" method="get" data-ajax="1">
