@@ -19,7 +19,6 @@
             <div class="col-4">
                 <label class="mb-2 fw-bold" for="{{ $form->sortby['name'] }}">Сортировать по:</label>
                 <select class="form-control form-select" name="{{ $form->sortby['name'] }}">
-                    <option value="">По умолчанию</option>
                     @foreach ($form->sortby['options'] as $k => $v)
                         <option value="{{ $k }}"@if (request()->get($form->sortby['name']) == $k) selected @endif>{{ $v }}</option> 
                     @endforeach

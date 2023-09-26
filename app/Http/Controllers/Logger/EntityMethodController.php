@@ -22,7 +22,7 @@ class EntityMethodController extends Controller
      */
     private $defaultParams = [
         'limit' => 5,
-        'sortby' => 'entity_methods.id', 
+        'sortby' => 'entity_methods.created_at', 
         'sortdir' => 'DESC',
     ];
 
@@ -30,6 +30,7 @@ class EntityMethodController extends Controller
         'sortby' => [
             'name' => 'sortby',
             'options' => [
+                'created_at'    => 'Дате создания',
                 'avg_time_exec' => 'Среднему времени выполнения запроса',
                 'max_time_exec' => 'Максимальному времени выполнения запроса',
                 'min_time_exec' => 'Минимальному времени выполнения запроса'
