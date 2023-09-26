@@ -66,7 +66,7 @@ class EntityMethodController extends Controller
 
     public function buildQuery()
     {
-        return EntityMethod::join('query_logs', function ($join) {
+        return EntityMethod::leftJoin('query_logs', function ($join) {
             $join->on('entity_methods.id', '=', 'query_logs.entity_method_id');
         }) 
         ->select('entity_methods.*', 
@@ -82,20 +82,20 @@ class EntityMethodController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {  
+    {   
+        $title = 'Method list';
+
         $this->prepareParams($request);
         $this->prepareSort();
 
-        $paginator = $this->buildQuery()
-            ->paginate($this->params['limit']);
-
+        $paginator = $this->buildQuery()->paginate($this->params['limit']);
         $pages = ceil($paginator->total() / $paginator->perPage());
 
         return view('logger.method.index', [
-            'title' => 'Method List',
+            'title'     => $title,
             'paginator' => $paginator,
-            'pages' => $pages,
-            'form' => (object)$this->form,
+            'pages'     => $pages,
+            'form'      => (object)$this->form,
         ]);
     }
 
@@ -104,8 +104,10 @@ class EntityMethodController extends Controller
      */
     public function create()
     {
+        $title = 'New method';
+
         return view('logger.method.create', [
-            'title' => 'New Method'
+            'title' => $title
         ]);
     }
 

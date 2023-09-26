@@ -14,6 +14,7 @@
         </div>
     </div>
 
+    @if ($pages > 0)
     <form onchange="this.submit()">
         <div class="row">
             <div class="col-4">
@@ -35,6 +36,7 @@
         </div>
     </form>
     <hr class="mb-4" />
+    @endif
 
     <table class="table table-hover">
         <thead>
@@ -112,7 +114,7 @@
             @endforelse
         </tbody>
 
-        @if (count($paginator))
+        @if ($pages > 0)
         <tfoot>
             <tr>
                 <td colspan="2">
