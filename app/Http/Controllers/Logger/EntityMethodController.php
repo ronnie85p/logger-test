@@ -22,7 +22,7 @@ class EntityMethodController extends Controller
      */
     private $defaultParams = [
         'limit' => 5,
-        'sortby' => 'entity_methods.created_at', 
+        'sortby' => 'created_at', 
         'sortdir' => 'DESC',
     ];
 

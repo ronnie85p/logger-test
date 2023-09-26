@@ -24,7 +24,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-4">
+            <div class="col-2">
                 <label class="mb-2 fw-bold" for="{{ $form->sortdir['name'] }}">В порядке:</label>
                 <select class="form-control form-select" name="{{ $form->sortdir['name'] }}">
                     @foreach ($form->sortdir['options'] as $k => $v)
@@ -98,7 +98,7 @@
                             @endforeach
                             <hr />
                             <div class="">
-                                MIN: {{ $item->min_time_exec }}; MAX: {{ $item->max_time_exec }}; MID: {{ $item->avg_time_exec }}; 
+                                MIN: {{ $item->min_time_exec }}; MAX: {{ $item->max_time_exec }}; AVG: {{ $item->avg_time_exec }}; 
                             </div>
                         @else
                             <div class="fst-italic">No queries yet</div>
