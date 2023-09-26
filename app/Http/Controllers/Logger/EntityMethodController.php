@@ -17,8 +17,6 @@ class EntityMethodController extends Controller
         'endpoint' => 'required|unique:entity_methods|max:255',
     ];
 
-    private $filterForQueryLogs = ['MIN', 'MAX', 'AVG'];
-
     /**
      * @var $defaultParams
      */
