@@ -53,7 +53,7 @@ class EntityMethod extends Model
     public function execute()
     {   
         $this->startTime();
-        usleep(mt_rand(1000, 100000));
+        usleep(mt_rand(1000000, 10000000));
         $this->endTime();
         
         return [

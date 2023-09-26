@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="row mb-2">
+    <div class="row mb-4">
         <div class="col">
             <a class="btn btn-light" href="{{ route('method.create') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -13,6 +13,29 @@
             </a>
         </div>
     </div>
+
+    <form onchange="this.submit()">
+        <div class="row">
+            <div class="col-4">
+                <label class="mb-2 fw-bold" for="{{ $form->sortby['name'] }}">Сортировать по:</label>
+                <select class="form-control form-select" name="{{ $form->sortby['name'] }}">
+                    <option value="">По умолчанию</option>
+                    @foreach ($form->sortby['options'] as $k => $v)
+                        <option value="{{ $k }}"@if (request()->get($form->sortby['name']) == $k) selected @endif>{{ $v }}</option> 
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-4">
+                <label class="mb-2 fw-bold" for="{{ $form->sortdir['name'] }}">В порядке:</label>
+                <select class="form-control form-select" name="{{ $form->sortdir['name'] }}">
+                    @foreach ($form->sortdir['options'] as $k => $v)
+                        <option value="{{ $k }}"@if (request()->get($form->sortdir['name']) == $k) selected @endif>{{ $v }}</option> 
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </form>
+    <hr class="mb-4" />
 
     <table class="table table-hover">
         <thead>
@@ -37,6 +60,7 @@
                         @else 
                             <div>-</div>
                         @endif
+                        {{-- <pre>{{ print_r($item, true)}}</pre> --}}
                     </td>
                     <td class="text-end">
                         <form class="d-inline" action="{{ route('api.method.exec', $item) }}" method="get" data-ajax="1">
@@ -74,6 +98,10 @@
                             @foreach ($logs as $log)
                                 <div>{{ $log->created_at }} - {{ $log->time_exec }} - {{ $log->data }}</div>
                             @endforeach
+                            <hr />
+                            <div class="">
+                                MIN: {{ $item->min_time_exec }}; MAX: {{ $item->max_time_exec }}; MID: {{ $item->avg_time_exec }}; 
+                            </div>
                         @else
                             <div class="fst-italic">No queries yet</div>
                         @endif
