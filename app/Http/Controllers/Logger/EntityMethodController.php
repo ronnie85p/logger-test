@@ -27,6 +27,14 @@ class EntityMethodController extends Controller
     ];
 
     private $form = [
+        'limit' => [
+            'name' => 'limit',
+            'options' => [
+                '5' => 5,
+                '10' => 10,
+                '15' => 15
+            ]
+        ],
         'sortby' => [
             'name' => 'sortby',
             'options' => [
