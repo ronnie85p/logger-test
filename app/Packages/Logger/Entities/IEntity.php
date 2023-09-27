@@ -11,6 +11,6 @@ interface IEntity
     public function find($id);
     public function list(ListParams $lp);
     public function listPaginator(ListParams $lp);
-    public function getListParams(ListParams $lp);
+    public function getListParams(array $params);
     public function execQuery($id);
 }
