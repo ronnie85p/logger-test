@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Logger;
+namespace App\Packages\Logger\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
