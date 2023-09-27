@@ -11,15 +11,25 @@ class EntityMethod implements IEntity
 {
     private $class = EntityMethodModel::class;
 
+    /**
+     * Factory method
+     * 
+     * @param array $params
+     * @return ListParams
+     */
     public function getListParams(array $params): ListParams
     {
         return new EntityMethodListParams($params);
     }
 
     /**
+     * Create 
+     * 
+     * @param array $data
+     * @return null
      * @throws \Exception
      */
-    public function create(array $data) 
+    public function create(array $data)
     {
         if ((new $this->class($data))->save() !== true) {
             throw new HttpException(503);
@@ -29,6 +39,9 @@ class EntityMethod implements IEntity
     }
 
     /**
+     * Delete
+     * 
+     * @param $id
      * @throws \Exception
      */
     public function delete($id) 
@@ -40,6 +53,9 @@ class EntityMethod implements IEntity
     }
 
     /**
+     * Find
+     * 
+     * @param $id
      * @throws \Exception
      */
     public function find($id) 
