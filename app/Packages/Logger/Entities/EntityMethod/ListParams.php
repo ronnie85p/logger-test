@@ -3,26 +3,21 @@
 namespace App\Packages\Logger\Entities\EntityMethod;
 
 use Illuminate\Support\Facades\DB;
-use App\Packages\Logger\Entities\IListParams;
+use App\Packages\Logger\Entities\ListParams as BaseListParams;
 
-class ListParams implements IListParams
+class ListParams extends BaseListParams
 {
-    /**
-     * @var $defaultParams
-     */
-    private $defaultParams = [
-        'limit' => 5,
-        'sortby' => 'created_at', 
-        'sortdir' => 'DESC',
-    ];
-
-    private $params = [];
-
     public function __construct(array $params)
     {
-        $this->params = array_merge($this->defaultParams, $params);
+        $this->setup($params);
+    }
+
+    public function setup(array $params)
+    {
+        parent::setup($params);
+
         $this->params['sortby'] = empty($this->params['sortby']) ? 
-            $this->defaultParams['sortby'] : strtolower(trim($this->params['sortby']));
+        $this->defaultParams['sortby'] : strtolower(trim($this->params['sortby']));
         $this->params['sortdir'] = strtolower(trim($this->params['sortdir']));
         $this->params['leftJoin'] = ['query_logs', function ($join) {
             $join->on('entity_methods.id', '=', 'query_logs.entity_method_id');
@@ -36,7 +31,7 @@ class ListParams implements IListParams
         $this->params['orderBy'] = [$this->params['sortby'], $this->params['sortdir']];
     }
 
-    public function get(string $key, $defaultValue = null): mixed
+    public function get(string $key, mixed $defaultValue = null): mixed
     {
         return isset($this->params[$key]) ? $this->params[$key] : $defaultValue;
     }
