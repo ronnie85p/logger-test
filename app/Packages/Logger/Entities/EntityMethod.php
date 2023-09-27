@@ -11,6 +11,11 @@ class EntityMethod implements IEntity
 {
     private $class = EntityMethodModel::class;
 
+    public function getListParams(array $params): ListParams
+    {
+        return new ListParams($params);
+    }
+
     /**
      * @throws \Exception
      */
@@ -57,10 +62,8 @@ class EntityMethod implements IEntity
         return $collection;
     }
 
-    public function listPaginator(array $params)
+    public function listPaginator(ListParams $lp)
     {
-        $lp = new ListParams($params);
-
         $paginator = $this->list($lp)->paginate($lp->get('limit'));
         $paginator->pages = ceil($paginator->total() / $paginator->perPage());
 

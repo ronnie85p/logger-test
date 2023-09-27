@@ -32,7 +32,9 @@ class EntityMethodController extends Controller
     public function index(Request $request)
     {   
         $title = 'Method list';
-        $paginator = $this->logger->listPaginator($request->input());
+        $paginator = $this->logger->listPaginator(
+            $this->logger->getListParams($request->input())
+        );
 
         return view('logger.method.index', [
             'title'     => $title,
