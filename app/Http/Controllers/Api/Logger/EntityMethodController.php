@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Api\Logger;
 
 use App\Http\Controllers\Controller;
-use App\Packages\Logger\Logger;
+use App\Packages\Logger\LoggerFactory;
+use App\Packages\Logger\Entities\EntityMethod;
 use Illuminate\Http\Request;
 
 class EntityMethodController extends Controller
 {
+    private $logger;
+
+    public function __construct()
+    {
+        $this->logger = (new LoggerFactory(
+            new EntityMethod()
+        ))->entity();
+    }
+
     public function response(array $data = [])
     {
         return response()->json([
@@ -18,7 +28,7 @@ class EntityMethodController extends Controller
 
     public function exec(Request $request, string $id)
     {
-        $method = Logger::entity()->execQuery($id);
+        $method = $this->logger->execQuery($id);
 
        return $this->response([
             'id' => $id, 
@@ -31,7 +41,7 @@ class EntityMethodController extends Controller
 
     public function destroy(string $id)
     {
-        Logger::entity()->delete($id);
+        $this->logger->delete($id);
 
         return $this->response(['id' => $id]);
     }

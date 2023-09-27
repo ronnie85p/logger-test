@@ -3,13 +3,23 @@
 namespace App\Http\Controllers\Logger;
 
 use App\Http\Controllers\Controller;
-use App\Packages\Logger\Logger;
 use App\Packages\Logger\Traits\Form;
+use App\Packages\Logger\LoggerFactory;
+use App\Packages\Logger\Entities\EntityMethod;
 use Illuminate\Http\Request;
 
 class EntityMethodController extends Controller
 {
     use Form;
+
+    private $logger;
+
+    public function __construct()
+    {
+        $this->logger = (new LoggerFactory(
+            new EntityMethod()
+        ))->entity();
+    }
 
     public function redirect(string $route = 'method.list')
     {
@@ -22,7 +32,7 @@ class EntityMethodController extends Controller
     public function index(Request $request)
     {   
         $title = 'Method list';
-        $paginator = Logger::getList($request);
+        $paginator = $this->logger->listPaginator($request->input());
 
         return view('logger.method.index', [
             'title'     => $title,
@@ -52,7 +62,7 @@ class EntityMethodController extends Controller
         // It will throw exception if error occured
         // and redirect to prev page
         $validated = $request->validate($this->validationRules);
-        Logger::entity()->create($validated);
+        $this->logger->create($validated);
 
         return $this->redirect();
     }
