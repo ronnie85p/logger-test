@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Packages\Logger;
+namespace App\Packages\Logger\Entities\EntityMethod;
 
 use Illuminate\Support\Facades\DB;
+use App\Packages\Logger\Entities\IListParams;
 
-class ListParams 
+class ListParams implements IListParams
 {
     /**
      * @var $defaultParams
@@ -35,7 +36,7 @@ class ListParams
         $this->params['orderBy'] = [$this->params['sortby'], $this->params['sortdir']];
     }
 
-    public function get(string $key, string $defaultValue = null): mixed
+    public function get(string $key, $defaultValue = null): mixed
     {
         return isset($this->params[$key]) ? $this->params[$key] : $defaultValue;
     }

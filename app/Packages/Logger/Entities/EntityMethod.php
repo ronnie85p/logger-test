@@ -4,14 +4,14 @@ namespace App\Packages\Logger\Entities;
 
 use App\Packages\Logger\Exceptions\HttpException;
 use App\Packages\Logger\Entities\IEntity;
-use App\Packages\Logger\ListParams;
+use App\Packages\Logger\Entities\EntityMethod\ListParams;
 use App\Packages\Logger\Models\EntityMethod as EntityMethodModel;
 
 class EntityMethod implements IEntity
 {
     private $class = EntityMethodModel::class;
 
-    public function getListParams(array $params): ListParams
+    public function getListParams(array $params): IListParams
     {
         return new ListParams($params);
     }
@@ -51,7 +51,7 @@ class EntityMethod implements IEntity
         return $inst;
     }
 
-    public function list(ListParams $lp)
+    public function list(IListParams $lp)
     {
         $collection = $this->class::leftJoin(
             ...$lp->get('leftJoin')
@@ -62,7 +62,7 @@ class EntityMethod implements IEntity
         return $collection;
     }
 
-    public function listPaginator(ListParams $lp)
+    public function listPaginator(IListParams $lp)
     {
         $paginator = $this->list($lp)->paginate($lp->get('limit'));
         $paginator->pages = ceil($paginator->total() / $paginator->perPage());
